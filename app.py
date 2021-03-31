@@ -2,8 +2,17 @@ import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = r'D:\LocalUsers\ERojo\PROTOTIPOS\Python\images_vault\uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+with open('upload_path.txt') as f:
+    lines = f.readlines()
+    if len(lines) <= 0:
+        quit()
+
+    UPLOAD_FOLDER = lines[0]
+    
+if UPLOAD_FOLDER == "":
+    quit()
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
